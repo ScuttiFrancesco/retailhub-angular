@@ -1,0 +1,74 @@
+<div class="cont">
+  <div class="menu-icon" (click)="toggleSidebar()">
+    <i class="fas fa-bars" [class.closed]="!sidebarActive"></i>
+  </div>
+  <div class="sidebar" [class.active]="sidebarActive">
+    <ul>
+      <li><a routerLink="/home" (click)="showTableView()">Home</a></li>
+      <li><a href="#">Link 2</a></li>
+      <li><a href="#">Link 3</a></li>
+      <li><a href="#">Link 4</a></li>
+      <li><a href="#">Link 5</a></li>
+    </ul>
+  </div>
+</div>
+<h1>HOMEPAGE</h1>
+<div class="bloccoCentrale">
+  <hr />
+  
+  <div *ngIf="showtable">
+    <div class="button-container">
+      <button class="button">
+        <i class="fas fa-box"></i> Prodotto
+        <i class="fas fa-plus"></i>
+      </button>
+      <button class="button">
+        <i class="fas fa-shopping-cart"></i> Ordine
+        <i class="fas fa-plus"></i>
+      </button>
+      <button class="button">
+        <i class="fas fa-user"></i> Cliente
+        <i class="fas fa-plus"></i>
+      </button>
+      <button class="button">
+        <i class="fas fa-store"></i> Negozio
+        <i class="fas fa-plus"></i>
+      </button>
+      <button class="button">
+        <i class="fas fa-warehouse"></i> Magazzino
+        <i class="fas fa-plus"></i>
+      </button>
+    </div>
+  </div>
+  <br /><br /><br />
+  <div *ngIf="showtable">
+    <h2>Ordini Ricevuti</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Data</th>
+          <th>Cliente</th>
+          <th>Negozio</th>
+          <th>Operatore</th>
+          <th>Stato Pagamento</th>
+          <th>Stato Ordine</th>
+          <th>Totale</th>
+          <th>Dettagli</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let order of orders">
+          <td>{{ order.dataOrdine }}</td>
+          <td>{{ order.cliente.nome }} {{ order.cliente.cognome }}</td>
+          <td>{{ order.negozio.sede }}</td>
+          <td>{{ order.operatore.nome }} {{ order.operatore.cognome }}</td>
+          <td>{{ order.pagamentoOrdine }}</td>
+          <td>{{ order.statoOrdine }}</td>
+          <td>{{ order.totale | currency : "EUR" }}</td>
+          <td><button class="dettagli-btn" (click)="showOrderDetails(order.id)">Dettagli</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <router-outlet></router-outlet>
+</div>

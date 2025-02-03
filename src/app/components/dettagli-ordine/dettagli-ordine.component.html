@@ -1,0 +1,113 @@
+<div class="container">
+  <h1 style="font-size: 3rem">Dettagli Ordine</h1>
+
+  <div class="container-1">
+    <div class="item">
+      <span class="item-a">Data</span>
+      <span style="padding-left: 1.75vw">{{ ordine?.dataOrdine }}</span>
+    </div>
+  </div>
+
+  <hr />
+
+  <div class="container-1">
+    <div class="item">
+      <span class="item-a">Cliente</span><strong> nome:</strong
+      ><span class="item-b">
+        {{ ordine?.cliente?.nome }} {{ ordine?.cliente?.cognome }}</span
+      >
+      <strong>telefono:</strong>
+      <span class="item-b">{{ ordine?.cliente?.telefono }}</span>
+      <strong>email:</strong>
+      <span class="item-b">{{ ordine?.cliente?.email }}</span>
+      <strong>data di nascita:</strong>
+      <span class="item-b">{{ ordine?.cliente?.ddn }}</span>
+    </div>
+  </div>
+
+  <hr />
+
+  <div class="container-1">
+    <div class="item">
+      <span class="item-a">Lista dei Prodotti</span>
+      <table class="products" >
+        <thead>
+        <tr>
+          <th>Nome Prodotto</th>
+          <th>Marca</th>
+          <th>Lotto</th>
+          <th>Data Scadenza</th>
+          <th>Tipo</th>
+          <th>Quantita</th>
+          <th>Magazzino</th>
+          <th>Prezzo</th>
+        </tr></thead>
+        <tbody>
+        <tr *ngFor="let prodotto of products">
+          <td>{{prodotto.nome}}</td>
+          <td>{{prodotto.marca}}</td>
+          <td>{{prodotto.lotto}}</td>
+          <td>{{prodotto.dataScadenza}}</td>
+          <td>{{prodotto.tipo}}</td>
+          <td>{{prodotto.quantita}}</td>
+          <td>{{prodotto.magazzino.sede}}</td>
+          <td>{{prodotto.prezzo}}</td>
+        </tr></tbody>
+
+      </table>
+    </div>
+  </div>
+
+  <hr />
+
+  <div class="container-1">
+    <div class="item">
+      <span class="item-a">Operatore</span><strong> nome:</strong
+      ><span class="item-b">
+        {{ ordine?.operatore?.nome }} {{ ordine?.operatore?.cognome }}</span
+      >
+      <strong>telefono:</strong>
+      <span class="item-b">{{ ordine?.operatore?.telefono }}</span>
+    </div>
+  </div>
+
+  <hr />
+
+  <div class="container-1">
+    <div class="item">
+      <span class="item-a">Negozio</span><strong> sede:</strong
+      ><span class="item-b"> {{ ordine?.negozio?.sede }}</span
+      ><strong> indirizzo:</strong
+      ><span class="item-b"> {{ ordine?.negozio?.indirizzo }}</span>
+      <strong>telefono:</strong>
+      <span class="item-b">{{ ordine?.negozio?.telefono }}</span>
+    </div>
+  </div>
+
+  <hr />
+
+  <div class="container-1">
+    <div class="item">
+      <span class="item-a">Stato Ordine</span
+      ><span class="item-b"> {{ ordine?.statoOrdine }}</span>
+    </div>
+  </div>
+
+  <hr />
+
+  <div class="container-1">
+    <div class="item">
+      <span class="item-a">Stato Pagamento</span
+      ><span class="item-b"> {{ ordine?.pagamentoOrdine }}</span>
+    </div>
+  </div>
+
+  <hr />
+
+  <div class="container-1">
+    <div class="item">
+      <span class="item-a">TOTALE</span
+      ><span class="item-b"> {{ ordine?.totale | currency : 'EUR'}}</span>
+    </div>
+  </div>
+</div>

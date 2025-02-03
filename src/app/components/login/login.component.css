@@ -1,0 +1,66 @@
+.cont {
+    font-family: 'Roboto', sans-serif;
+    background-color: #d5d2d2; /* Sfondo leggermente più scuro */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.login-container {
+    
+    background-color: #0b0b0b;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    text-align: center;
+}
+.login-container h2 {
+    color: #b71c1c;
+    margin-bottom: 20px;
+}
+.login-container .input-group {
+    margin-bottom: 15px;
+    position: relative;
+}
+.login-container .input-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #b71c1c;
+    border-radius: 5px;
+    background-color: #ffffff;
+    color: #2c2c2c;
+}
+.login-container .input-group input:focus {
+    outline: none;
+    border-color: #b71c1c;
+}
+.login-container .input-group i {
+    position: absolute;
+    margin-left: -30px;
+    margin-top: 12px;
+    color: #b71c1c;
+}
+.login-container .btn {
+    background-color: #b71c1c;
+    color: #ffffff;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 16px;
+}
+.login-container .btn:hover {
+    background-color: #8e0000;
+}
+.login-container .forgot-password {
+    margin-top: 15px;
+    color: #b71c1c;
+    text-decoration: none;
+}
+.login-container .forgot-password:hover {
+    text-decoration: underline;
+}
