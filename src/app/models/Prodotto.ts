@@ -1,13 +1,16 @@
 import { Magazzino } from "./Magazzino";
 
-export interface Prodotto{
-    id: number;
-    nome: string;
-    marca: string;
-    lotto: string;
-    dataScadenza: string;
-    prezzo: number;
-    tipo: string;
-    quantita: number;
-    magazzino: Magazzino;    
+export class Prodotto{
+    id: number | undefined;
+    nome: string | undefined;
+    marca: string   | undefined;
+    lotto: string | undefined;
+    dataScadenza: string    | undefined;
+    prezzo: number  | undefined;
+    tipo: string | undefined;
+    quantita: number | undefined;
+    vecchiaQuantita : number | undefined;
+    magazzino: Magazzino | undefined;    
+
+    constructor(){}
 }

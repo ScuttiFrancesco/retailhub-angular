@@ -1,10 +1,11 @@
-export interface Cliente {
-    id: number;
-    totale: number;
-    dataRegistrazione: Date;
-    nome: string;
-    cognome: string;
-    ddn: Date;
-    email: string;
-    telefono: string;
+export class Cliente {
+    id: number | undefined;
+    dataRegistrazione   : string | undefined;
+    nome: string | undefined;
+    cognome: string | undefined;
+    ddn: string | undefined;
+    email: string | undefined;
+    telefono: string | undefined;
+
+    
     }

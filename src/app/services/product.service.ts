@@ -21,4 +21,13 @@ export class ProductService {
   
       return this.http.get<Prodotto[]>(apiUrl + id, { headers });
     }
+
+    getListaProdotti(): Observable<Prodotto[]> {
+      const apiUrl = 'http://localhost:8080/api/prodotto/getListaProdotti'; 
+      const headers = new HttpHeaders({
+        'Authorization': `Bearer ${this.tokenService.token}`
+      });
+  
+      return this.http.get<Prodotto[]>(apiUrl, { headers });
+    }
 }

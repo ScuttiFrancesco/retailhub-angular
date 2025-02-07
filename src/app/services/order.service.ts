@@ -1,35 +1,72 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Order } from '../models/Order';
 import { TokenService } from './token.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-export class OrderService  {
-   
-  
+export class OrderService {
+  constructor(private http: HttpClient, private tokenService: TokenService) {}
 
-  constructor(private http: HttpClient, private tokenService : TokenService) {}
+  private refreshData = new BehaviorSubject<void>(undefined);
 
-  
+  // Observable per notificare gli aggiornamenti
+  refreshData$ = this.refreshData.asObservable();
 
-  getOrdersByStato(p0: string): Observable<Order[]> {
-    const apiUrl = 'http://localhost:8080/api/ordine/getListaOrdiniByStatoOrdine/'; 
+  // Metodo per notificare che i dati devono essere aggiornati
+  notifyDataChange() {
+    this.refreshData.next();
+  }
+
+  getOrdersByStato(stato: string): Observable<Order[]> {
+    const apiUrl =
+      'http://localhost:8080/api/ordine/getListaOrdiniByStatoOrdine/';
     const headers = new HttpHeaders({
-      'Authorization': `Bearer ${this.tokenService.token}`
+      Authorization: `Bearer ${this.tokenService.token}`,
     });
 
-    return this.http.get<Order[]>(apiUrl + 'RICEVUTO', { headers });
+    return this.http.get<Order[]>(apiUrl + stato, { headers });
   }
 
   getOrderById(id: number): Observable<Order> {
-    const apiUrl = 'http://localhost:8080/api/ordine/getOrdine/'; 
+    const apiUrl = 'http://localhost:8080/api/ordine/getOrdine/';
     const headers = new HttpHeaders({
-      'Authorization': `Bearer ${this.tokenService.token}`
+      Authorization: `Bearer ${this.tokenService.token}`,
     });
 
     return this.http.get<Order>(apiUrl + id, { headers });
+  }
+
+  inserisciOrdine(order: Order): Observable<Order> {
+    const apiUrl = 'http://localhost:8080/api/ordine/admin/inserisci';
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this.tokenService.token}`,
+    });
+
+    return this.http.post<Order>(apiUrl, order, { headers });
+  }
+
+  aggiornaOrdine(order: Order): Observable<Order> {
+    const apiUrl = 'http://localhost:8080/api/ordine/admin/aggiorna/';
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this.tokenService.token}`,
+    });
+
+    return this.http.put<Order>(apiUrl + order.id?.toString(), order, {
+      headers,
+    });
+  }
+
+  eliminaOrdine(id: number): Observable<Order> {
+    const apiUrl = 'http://localhost:8080/api/ordine/admin/elimina/';
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this.tokenService.token}`,
+    });
+
+    return this.http.delete<Order>(apiUrl + id.toString(), {
+      headers,
+    });
   }
 }

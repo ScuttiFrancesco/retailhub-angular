@@ -1,6 +1,9 @@
 <div class="container">
-  <h1 style="font-size: 3rem">Dettagli Ordine</h1>
-
+  <div style="display: flex; justify-content: space-between;">
+    <button class="button" (click)="indietro()">Indietro</button>
+    <h1 style="font-size: 3rem;">Dettagli Ordine</h1>
+    <button class="button" (click)="next()">Next</button>
+  </div>
   <div class="container-1">
     <div class="item">
       <span class="item-a">Data</span>
@@ -30,30 +33,31 @@
   <div class="container-1">
     <div class="item">
       <span class="item-a">Lista dei Prodotti</span>
-      <table class="products" >
+      <table class="products">
         <thead>
-        <tr>
-          <th>Nome Prodotto</th>
-          <th>Marca</th>
-          <th>Lotto</th>
-          <th>Data Scadenza</th>
-          <th>Tipo</th>
-          <th>Quantita</th>
-          <th>Magazzino</th>
-          <th>Prezzo</th>
-        </tr></thead>
+          <tr>
+            <th>Nome Prodotto</th>
+            <th>Marca</th>
+            <th>Lotto</th>
+            <th>Data Scadenza</th>
+            <th>Tipo</th>
+            <th>Quantita</th>
+            <th>Magazzino</th>
+            <th>Prezzo</th>
+          </tr>
+        </thead>
         <tbody>
-        <tr *ngFor="let prodotto of products">
-          <td>{{prodotto.nome}}</td>
-          <td>{{prodotto.marca}}</td>
-          <td>{{prodotto.lotto}}</td>
-          <td>{{prodotto.dataScadenza}}</td>
-          <td>{{prodotto.tipo}}</td>
-          <td>{{prodotto.quantita}}</td>
-          <td>{{prodotto.magazzino.sede}}</td>
-          <td>{{prodotto.prezzo}}</td>
-        </tr></tbody>
-
+          <tr *ngFor="let prodotto of products">
+            <td>{{ prodotto.nome }}</td>
+            <td>{{ prodotto.marca }}</td>
+            <td>{{ prodotto.lotto }}</td>
+            <td>{{ prodotto.dataScadenza }}</td>
+            <td>{{ prodotto.tipo }}</td>
+            <td>{{ prodotto.quantita }}</td>
+            <td>{{ prodotto.magazzino?.sede }}</td>
+            <td>{{ prodotto.prezzo }}</td>
+          </tr>
+        </tbody>
       </table>
     </div>
   </div>
@@ -107,7 +111,7 @@
   <div class="container-1">
     <div class="item">
       <span class="item-a">TOTALE</span
-      ><span class="item-b"> {{ ordine?.totale | currency : 'EUR'}}</span>
+      ><span class="item-b"> {{ ordine?.totale | currency : "EUR" }}</span>
     </div>
   </div>
 </div>

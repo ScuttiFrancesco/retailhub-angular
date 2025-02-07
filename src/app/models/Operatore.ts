@@ -1,11 +1,11 @@
-export interface Operatore {
-    id: number;
-    totale: number;
-    dataAssunzione: Date;
-    livello: number;
-    nome: string;
-    cognome: string;
-    ddn: Date;
-    email: string;
-    telefono: string;
+export class Operatore {
+    id: number | undefined;
+    totale: number | undefined;
+    dataAssunzione: string | undefined;
+    livello: number | undefined;
+    nome: string | undefined;
+    cognome: string | undefined; 
+    ddn: string | undefined;
+    email: string | undefined;
+    telefono: string    | undefined;
     }
