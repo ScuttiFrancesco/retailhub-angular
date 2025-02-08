@@ -1,0 +1,33 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Aggiungi questa proprietà per centrare verticalmente */
+    flex-direction: column;
+     
+  }
+
+ngx-charts-bar-vertical {
+  margin: 20px auto;
+  display: block;
+}
+
+.button {
+  width: 10vw;
+  height: fit-content;
+  background-color: #ffffff;
+  color: rgb(0, 0, 0);
+  border: solid 2.5px #000000;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  padding: 7.5px;
+  
+}
+.button:hover {
+  background-color: #000000;
+  color: rgb(255, 255, 255);
+}
+.button i {
+  margin-bottom: 4px;
+}

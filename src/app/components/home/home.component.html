@@ -14,8 +14,19 @@
 </div>
 <header>
   <div>
-    <h1 >ORDINI RICEVUTI</h1>
-    <hr />
+    <h1>
+      ORDINI in stato:
+      <span
+        style="
+          font-size: 4rem;
+          text-shadow: none;
+          color: black;
+          font-weight: bold;
+          font-style: italic;
+        "
+        >{{ statoOrdPlu }}</span
+      >
+    </h1>
   </div>
 </header>
 <div class="bloccoCentrale">
@@ -25,15 +36,11 @@
         <i class="fas fa-box"></i>
         <div><i class="fas fa-plus"></i> Prodotto</div>
       </button>
-      <button
-        class="button"
-        routerLink="/inserimento-ordine"
-        (click)="showFormInserimentoOrdine()"
-      >
+      <button class="button" (click)="showFormInserimentoOrdine()">
         <i class="fas fa-shopping-cart"></i>
         <div><i class="fas fa-plus"></i> Ordine</div>
       </button>
-      <button class="button">
+      <button class="button" (click)="showFormInserimentoCliente()">
         <i class="fas fa-user"></i>
         <div><i class="fas fa-plus"></i> Cliente</div>
       </button>
@@ -46,8 +53,42 @@
         <div><i class="fas fa-plus"></i> Magazzino</div>
       </button>
     </div>
+
+    <br /><br />
+
+    <div style="display: flex; justify-content: space-around">
+      <div>
+        <h3>STATO ORDINI</h3>
+        <select
+          name="statoOrdine"
+          [(ngModel)]="statoOrd"
+          (change)="changeSelect()"
+        >
+          <option value="RICEVUTO">RICEVUTI</option>
+          <option value="EVASO">EVASI</option>
+          <option value="PREPARAZIONE">IN PREPARAZIONE</option>
+        </select>
+      </div>
+      <div><button class="button" style="width: fit-content; margin-top: 40%;" (click)="showGrafici()">GRAFICI</button></div>
+      <div>
+        <h3>ORDINA PER</h3>
+        <select
+          name="statoOrdine"
+          [(ngModel)]="ordineList"
+          (change)="changeList()"
+        >
+          <option value="data">DATA</option>
+          <option value="cognomeCliente">CLIENTE</option>
+          <option value="cognomeOperatore">IN OPERATORE</option>
+          <option value="totaleAsc">TOTALE ASC</option>
+          <option value="totaleDesc">TOTALE DESC</option>
+        </select>
+      </div>
+    </div>
   </div>
-  <br /><br /><br />
+
+  <br />
+
   <div *ngIf="showtable">
     <h2>Ordini Ricevuti</h2>
     <table>
@@ -65,27 +106,36 @@
         </tr>
       </thead>
       <tbody>
-        <tr> 
+        <tr>
           <td></td>
           <td></td>
           <td></td>
           <td></td>
           <td></td>
           <td></td>
-          <td>><select name="totaleparam" id="totaleparam" [(ngModel)]="valoreselectmagg" >
-            <option value="5">5</option>
-            <option value="50">50</option>
-            <option value="100">100</option>
-            <option value="500">500</option>
-          </select>
-          &lt; <select name="totaleparam" id="totaleparam" [(ngModel)]="valoreselectmin" >
+          <td>
+            ><select
+              name="totaleparam"
+              id="totaleparam"
+              [(ngModel)]="valoreselectmagg"
+            >
               <option value="5">5</option>
               <option value="50">50</option>
               <option value="100">100</option>
               <option value="500">500</option>
-
-          </select></td>
-
+            </select>
+            &lt;
+            <select
+              name="totaleparam"
+              id="totaleparam"
+              [(ngModel)]="valoreselectmin"
+            >
+              <option value="5">5</option>
+              <option value="50">50</option>
+              <option value="100">100</option>
+              <option value="500">500</option>
+            </select>
+          </td>
         </tr>
         <tr *ngFor="let order of orders">
           <td>{{ order.dataOrdine }}</td>
@@ -94,9 +144,12 @@
           <td>{{ order.operatore?.nome }} {{ order.operatore?.cognome }}</td>
           <td>{{ order.pagamentoOrdine }}</td>
           <td>{{ order.statoOrdine }}</td>
-          <td [ngStyle]="stiletab(order.totale!)">{{ order.totale | currency : "EUR" }}</td>
+          <td [ngStyle]="stiletab(order.totale!)">
+            {{ order.totale | currency : "EUR" }}
+          </td>
           <td>
-            <button style="color: black; background-color: bisque;"
+            <button
+              style="color: black; background-color: bisque"
               class="dettagli-btn"
               (click)="showOrderDetails(order.id!)"
             >
@@ -104,16 +157,14 @@
             </button>
           </td>
           <td>
-            <button 
-              class="dettagli-btn"
-              (click)="aggiornaForm(order.id!)"
-            >
+            <button class="dettagli-btn" (click)="aggiornaForm(order.id!)">
               Aggiona
             </button>
-          
-            <button style="background-color: brown;"
+
+            <button
+              style="background-color: brown"
               class="dettagli-btn"
-              (click)="elimina(order.id!)" 
+              (click)="elimina(order.id!)"
             >
               Elimina
             </button>
@@ -121,6 +172,6 @@
         </tr>
       </tbody>
     </table>
-  </div>
-  <router-outlet></router-outlet>
+  </div><router-outlet></router-outlet>
 </div>
+

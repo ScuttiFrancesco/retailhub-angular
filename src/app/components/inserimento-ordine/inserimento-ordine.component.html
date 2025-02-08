@@ -1,117 +1,121 @@
 <div class="container" id="mainContainer">
+  <!-- Form di inserimento ordine -->
+  <form (ngSubmit)="isFormValid() && onSubmit()" #orderForm="ngForm">
+    <h1>Inserimento Ordine</h1>
+    <label for="date">Data:</label>
+    <input
+      type="date"
+      id="date"
+      name="date"
+      required
+      [(ngModel)]="date"
+    /><br />
 
-    <!-- Form di inserimento ordine -->
-    <form (ngSubmit)="isFormValid() && onSubmit()" #orderForm="ngForm">
-      <h1>Inserimento Ordine</h1>
-      <label for="date">Data:</label>
-      <input type="date" id="date" name="date" required [(ngModel)]="date"/><br />
+    <label for="client">Cliente:</label>
+    <select
+      id="client"
+      name="client"
+      [(ngModel)]="selectedClientId"
+      required
+      placeholder="Seleziona un cliente"
+    >
+      <option value="">Seleziona un cliente</option>
+      <option value="newClient">Nuovo Cliente</option>
+      <option *ngFor="let client of clientsList" [value]="client.id">
+        {{ client.nome }} {{ client.cognome }}
+      </option></select
+    ><br />
 
-      <label for="client">Cliente:</label>
+    <label for="operator">Operatore:</label>
+    <select
+      id="operator"
+      name="operator"
+      [(ngModel)]="selectedOperatorId"
+      required
+    >
+      <option value="">Seleziona un operatore</option>
+      <option *ngFor="let operator of operatorsList" [value]="operator.id">
+        {{ operator.nome }} {{ operator.cognome }}
+      </option></select
+    ><br />
+
+    <label for="negozio">Negozio:</label>
+    <select
+      id="negozio"
+      name="negozio"
+      [(ngModel)]="selectedNegozioId"
+      required
+    >
+      <option value="">Seleziona un negozio</option>
+      <option *ngFor="let negozio of negoziList" [value]="negozio.id">
+        {{ negozio.sede }} - {{ negozio.indirizzo }}
+      </option></select
+    ><br />
+
+    <div id="productList">
+      <h3>Lista Prodotti</h3>
+      <label for="newProduct">Prodotto:</label>
       <select
-        id="client"
-        name="client"
-        [(ngModel)]="selectedClientId"
-        required
-        placeholder="Seleziona un cliente"
-      >
-        <option value="">Seleziona un cliente</option>
-        <option value="newClient">Nuovo Cliente</option>
-        <option *ngFor="let client of clientsList" [value]="client.id">
-          {{ client.nome }} {{ client.cognome }}
-        </option></select
-      ><br />
-
-      <label for="operator">Operatore:</label>
-      <select
-        id="operator"
-        name="operator"
-        [(ngModel)]="selectedOperatorId"
+        name="newProduct"
+        id="newProduct"
+        [(ngModel)]="newProduct"
         required
       >
-        <option value="">Seleziona un operatore</option>
-        <option *ngFor="let operator of operatorsList" [value]="operator.id">
-          {{ operator.nome }} {{ operator.cognome }}
-        </option></select
-      ><br />
-
-      <label for="negozio">Negozio:</label>
-      <select
-        id="negozio"
-        name="negozio"
-        [(ngModel)]="selectedNegozioId"
-        required
-      >
-        <option value="">Seleziona un negozio</option>
-        <option *ngFor="let negozio of negoziList" [value]="negozio.id">
-          {{ negozio.sede }} - {{ negozio.indirizzo }}
-        </option></select
-      ><br />
-
-      <div id="productList">
-        <h3>Lista Prodotti</h3>
-        <label for="newProduct">Prodotto:</label>
-        <select
-          name="newProduct"
-          id="newProduct"
-          [(ngModel)]="newProduct"
-          required
-        >
         <option value="">Seleziona un prodotto</option>
-          <option *ngFor="let product of productsList" [ngValue]="product">
-            {{ product.nome }}
-          </option>
-        </select>
-        <label for="newQuantity">Quantità:</label>
-        <input
-          type="number"
-          name="newQuantity"
-          id="newQuantity"
-          [(ngModel)]="newQuantity"        
-          min="1"
-          required          
-        />
-        <button type="button" (click)="addProduct()">Aggiungi Prodotto</button>
+        <option *ngFor="let product of productsList" [ngValue]="product">
+          {{ product.nome }}
+        </option>
+      </select>
+      <label for="newQuantity">Quantità:</label>
+      <input
+        type="number"
+        name="newQuantity"
+        id="newQuantity"
+        [(ngModel)]="newQuantity"
+        min="1"
+        required
+      />
+      <button type="button" (click)="addProduct()">Aggiungi Prodotto</button>
 
-        <div id="productsAdded">
-          <div
-            *ngFor="let product of products; let i = index"
-            class="product-item"
+      <div id="productsAdded">
+        <div
+          *ngFor="let product of products; let i = index"
+          class="product-item"
+        >
+          {{ product.nome }} - Quantità: {{ product.quantita }}
+          <button
+            type="button"
+            (click)="removeProduct(i)"
+            style="margin-left: 10px"
           >
-            {{ product.nome }} - Quantità: {{ product.quantita }}
-            <button
-              type="button"
-              (click)="removeProduct(i)"
-              style="margin-left: 10px"
-            >
-              Rimuovi
-            </button>
-          </div>
+            Rimuovi
+          </button>
         </div>
       </div>
-      <br />
+    </div>
+    <br />
 
-      <button type="submit" [disabled]="!isFormValid()">Invia Ordine</button>
-    </form>
- 
+    <button type="submit" [disabled]="!isFormValid()">Invia Ordine</button>
+  </form>
 
   <!-- Form di inserimento nuovo cliente (inizialmente nascosto) -->
   <div *ngIf="selectedClientId === 'newClient'" id="newClientFormContainer">
     <form #newClientForm="ngForm" (ngSubmit)="onSubmitNewClient(newClientForm)">
       <h2>Inserimento Nuovo Cliente</h2>
       <label for="nome">Nome:</label>
-      <input type="text" id="nome" name="nome" required ngModel/><br />
+      <input type="text" id="nome" name="nome" required ngModel /><br />
 
       <label for="cognome">Cognome:</label>
-      <input type="text" id="cognome" name="cognome" required ngModel/><br />
+      <input type="text" id="cognome" name="cognome" required ngModel /><br />
 
       <label for="ddn">Data di Nascita:</label>
-      <input type="date" id="ddn" name="ddn" required ngModel/><br />
+      <input type="date" id="ddn" name="ddn" required ngModel /><br />
 
       <label for="email">Email:</label>
-      <input type="email" id="email" name="email" required ngModel/><br />
+      <input type="email" id="email" name="email" required ngModel /><br />
 
       <label for="telefono">Telefono:</label>
-      <input type="tel" id="telefono" name="telefono" required ngModel/><br />
+      <input type="tel" id="telefono" name="telefono" required ngModel /><br />
 
       <button type="submit">Salva Cliente</button>
     </form>

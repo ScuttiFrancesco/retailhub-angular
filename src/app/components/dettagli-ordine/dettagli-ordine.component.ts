@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { OrderService } from '../../services/order.service';
 import { Order } from '../../models/Order';
 import { ActivatedRoute, Route, Router } from '@angular/router';
@@ -15,14 +15,16 @@ import { HomeComponent } from '../home/home.component';
   styleUrl: './dettagli-ordine.component.css',
 })
 export class DettagliOrdineComponent implements OnInit {
-
+  mostraModale: boolean = false;
+  messaggioInput = '';
   next() {
-    console.log(this.orders)
-    let index = this.orders.findIndex(o => o.id === Number(this.id));
-    console.log(index)
-    console.log(this.id)
+    console.log(this.orders);
+    let index = this.orders.findIndex((o) => o.id === Number(this.id));
+    console.log(index);
+    console.log(this.id);
     if (index === -1 || index + 1 >= this.orders.length) {
-      alert('Ordine non trovato o non ci sono più ordini successivi');
+      this.mostraModale = true;
+      this.messaggioInput = 'Ordine non trovato o nessun ordine successivo';
       return;
     }
 
@@ -38,7 +40,7 @@ export class DettagliOrdineComponent implements OnInit {
   products: Prodotto[] = [];
   id: number = 0;
   ordine: Order | undefined;
-  orders : Order[] = [];
+  orders: Order[] = [];
 
   constructor(
     private orderService: OrderService,
@@ -52,7 +54,7 @@ export class DettagliOrdineComponent implements OnInit {
     this.id = this.route.snapshot.params['id'];
     this.loadOrderDetails(this.id);
     this.loadProductsOrder();
-    this.loadOrderRicevuti();
+    this.loadOrderRicevuti(this.homeComp.statoOrd);
   }
 
   loadOrderDetails(id: number): void {
@@ -75,15 +77,18 @@ export class DettagliOrdineComponent implements OnInit {
         console.error("Errore nel recupero dei dettagli dell'ordine:", error)
     );
   }
-  
-  loadOrderRicevuti(){
-    this.orderService.getOrdersByStato('RICEVUTO').subscribe(
+
+  loadOrderRicevuti(stato: string) {
+    this.orderService.getOrdersByStato(stato).subscribe(
       (data) => {
         this.orders = data;
-        console.log(this.orders)
+        console.log('ddddd', this.orders);
       },
       (error) =>
         console.error("Errore nel recupero dei dettagli dell'ordine:", error)
     );
+  }
+  chiudiModale(){
+    this.mostraModale = false;
   }
 }

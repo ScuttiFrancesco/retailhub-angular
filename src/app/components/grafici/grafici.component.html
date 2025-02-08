@@ -1,0 +1,19 @@
+<div class="container">
+  <div><button class="button" (click)="home()">HOME</button></div>
+  <div><h1>Grafico Totale Ordini per Cliente</h1></div>
+  <div>
+    <ngx-charts-bar-vertical
+      [view]="[700, 400]"
+      [scheme]="colorScheme"
+      [results]="chartData"
+      [xAxis]="true"
+      [yAxis]="true"
+      [legend]="true"
+      [showXAxisLabel]="true"
+      [showYAxisLabel]="true"
+      [xAxisLabel]="'Cliente'"
+      [yAxisLabel]="'Totale'"
+    >
+    </ngx-charts-bar-vertical>
+  </div>
+</div>

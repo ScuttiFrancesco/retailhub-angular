@@ -16,9 +16,9 @@ export class ModalComponent implements OnInit {
   messaggi: Cliente[] = [];
 
   ngOnInit(): void {
-    this.sottoScrivi();
+  //  this.sottoScrivi();
   }
-
+/*
   sottoScrivi() {
     this.mqttService
       .topicSubscribe('messaggi/avvisi/#')
@@ -27,5 +27,5 @@ export class ModalComponent implements OnInit {
        this.messaggi.push(paidLoad);
        console.log(this.messaggi);
       });
-  }
+  }*/
 }

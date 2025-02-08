@@ -1,8 +1,7 @@
 .container-1 {
     display: flex;
-    flex-wrap: wrap;
-    gap: 16px; /* Spazio tra gli elementi */
-    
+    flex-wrap: wrap;  
+      
   }
   
   .item {
@@ -24,7 +23,7 @@
     text-decoration: underline;
     color: rgb(80, 80, 80);
     padding-right: 3vw;
-    padding-left: 0.5vw;
+    
   }
 
 .container {
@@ -46,11 +45,12 @@ h1 {
     padding: 8px;
 }
 .products th {
-    text-align: start;
+    text-align: center;
     background-color: #f2f2f2;
 }
 
 .products td {
+  text-align: center;
     font-size: x-large;
 }
 .products {

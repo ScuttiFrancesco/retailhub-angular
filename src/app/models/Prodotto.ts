@@ -9,7 +9,7 @@ export class Prodotto{
     prezzo: number  | undefined;
     tipo: string | undefined;
     quantita: number | undefined;
-    vecchiaQuantita : number | undefined;
+    quant : number | undefined;
     magazzino: Magazzino | undefined;    
 
     constructor(){}

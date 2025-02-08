@@ -1,0 +1,55 @@
+/* Overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7); /* Sfondo scuro con opacità */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Contenuto della modale */
+.modal-content {
+  background: #fff; /* Background bianco */
+  padding: 30px 40px; /* Spaziatura interna aumentata */
+  border-radius: 12px; /* Bordo arrotondato */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Ombreggiatura leggera */
+  width: 400px; /* Dimensione aumentata */
+  max-width: 90%; /* Adattamento a schermi piccoli */
+  text-align: center;
+}
+
+/* Titolo della modale */
+.modal-content h2 {
+  font-size: 24px; /* Dimensione testo aumentata */
+  margin-bottom: 15px; /* Spaziatura inferiore */
+  color: #333; /* Colore testo scuro */
+}
+
+/* Messaggio della modale */
+.modal-content div {
+  font-size: 16px; /* Dimensione testo normale */
+  color: #555; /* Colore testo grigio */
+  margin-bottom: 20px; /* Spaziatura inferiore */
+}
+
+/* Bottone della modale */
+.modal-content button {
+  background: #007bff; /* Blu acceso */
+  color: #fff; /* Testo bianco */
+  border: none; /* Senza bordo */
+  padding: 10px 20px; /* Spaziatura interna */
+  font-size: 16px; /* Dimensione testo aumentata */
+  border-radius: 5px; /* Bordo arrotondato */
+  cursor: pointer; /* Cursor mano */
+  transition: background 0.3s ease; /* Effetto transizione */
+}
+
+/* Effetto hover sul bottone */
+.modal-content button:hover {
+  background: #0056b3; /* Blu scuro al passaggio del mouse */
+}

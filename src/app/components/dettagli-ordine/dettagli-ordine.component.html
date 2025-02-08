@@ -1,33 +1,59 @@
 <div class="container">
-  <div style="display: flex; justify-content: space-between;">
-    <button class="button" (click)="indietro()">Indietro</button>
-    <h1 style="font-size: 3rem;">Dettagli Ordine</h1>
+  <app-avviso [visibile]="mostraModale" [messaggioModale]="messaggioInput" (chiudiModal)="chiudiModale()"></app-avviso>
+  <div style="display: flex; justify-content: space-between">
+    <button class="button" (click)="indietro()">Home</button>
+    <h1 style="font-size: 3rem">Dettagli Ordine</h1>
     <button class="button" (click)="next()">Next</button>
   </div>
-  <div class="container-1">
-    <div class="item">
-      <span class="item-a">Data</span>
-      <span style="padding-left: 1.75vw">{{ ordine?.dataOrdine }}</span>
-    </div>
-  </div>
 
+  <table>
+    <div class="container-1">
+      <th></th>
+      <div class="item">
+        <td><span class="item-a" >Data</span></td>
+        <td>
+          <span >{{ ordine?.dataOrdine }}</span>
+        </td>
+      </div>
+    </div>
+  </table>
   <hr />
 
-  <div class="container-1">
-    <div class="item">
-      <span class="item-a">Cliente</span><strong> nome:</strong
-      ><span class="item-b">
-        {{ ordine?.cliente?.nome }} {{ ordine?.cliente?.cognome }}</span
-      >
-      <strong>telefono:</strong>
-      <span class="item-b">{{ ordine?.cliente?.telefono }}</span>
-      <strong>email:</strong>
-      <span class="item-b">{{ ordine?.cliente?.email }}</span>
-      <strong>data di nascita:</strong>
-      <span class="item-b">{{ ordine?.cliente?.ddn }}</span>
-    </div>
-  </div>
+  <table>
+    <div class="container-1">
+      <div class="item">
+        <tr>
+          <th></th>
+          <th></th>
+        </tr>
+        <tr>
+          <td><span class="item-a">Cliente</span></td>
+          <td>
+            <strong> nome:</strong
+            ><span class="item-b">
+              {{ ordine?.cliente?.nome }} {{ ordine?.cliente?.cognome }}</span
+            >
+          </td>
 
+          <td>
+            <strong>telefono:</strong>
+            <span class="item-b">{{ ordine?.cliente?.telefono }}</span>
+          </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>
+            <strong>email:</strong>
+            <span class="item-b">{{ ordine?.cliente?.email }}</span>
+          </td>
+          <td>
+            <strong>data di nascita:</strong>
+            <span class="item-b">{{ ordine?.cliente?.ddn }}</span>
+          </td>
+        </tr>
+      </div>
+    </div>
+  </table>
   <hr />
 
   <div class="container-1">
@@ -64,53 +90,74 @@
 
   <hr />
 
-  <div class="container-1">
-    <div class="item">
-      <span class="item-a">Operatore</span><strong> nome:</strong
-      ><span class="item-b">
-        {{ ordine?.operatore?.nome }} {{ ordine?.operatore?.cognome }}</span
-      >
-      <strong>telefono:</strong>
-      <span class="item-b">{{ ordine?.operatore?.telefono }}</span>
+  <table>
+    <div class="container-1">
+      <div class="item">
+        <tr>
+          <th></th>
+          <th></th>
+        </tr>
+        <tr>
+          <td><span class="item-a">Operatore</span></td>
+          <td>
+            <strong> nome:</strong
+            ><span class="item-b">
+              {{ ordine?.operatore?.nome }}
+              {{ ordine?.operatore?.cognome }}</span
+            >
+            <strong>telefono:</strong>
+            <span class="item-b">{{ ordine?.operatore?.telefono }}</span>
+          </td>
+        </tr>
+      </div>
     </div>
-  </div>
+  </table>
+  <hr />
+
+  <table>
+    <div class="container-1">
+      <div class="item">
+        <tr>
+          <th></th>
+          <th></th>
+        </tr>
+        <tr>
+          <td>
+            <span class="item-a">Negozio</span>
+          </td>
+          <td>
+            <strong> sede:</strong
+            ><span class="item-b"> {{ ordine?.negozio?.sede }}</span
+            ><strong> indirizzo:</strong
+            ><span class="item-b"> {{ ordine?.negozio?.indirizzo }}</span>
+            <strong>telefono:</strong>
+            <span class="item-b">{{ ordine?.negozio?.telefono }}</span>
+          </td>
+        </tr>
+      </div>
+    </div>
+  </table>
 
   <hr />
 
-  <div class="container-1">
-    <div class="item">
-      <span class="item-a">Negozio</span><strong> sede:</strong
-      ><span class="item-b"> {{ ordine?.negozio?.sede }}</span
-      ><strong> indirizzo:</strong
-      ><span class="item-b"> {{ ordine?.negozio?.indirizzo }}</span>
-      <strong>telefono:</strong>
-      <span class="item-b">{{ ordine?.negozio?.telefono }}</span>
+  <table>
+    <tr><th></th><th></th></tr>
+    <div class="container-1">
+      <div class="item">
+        <td>
+        <span class="item-a">Stato Ordine</span
+        ></td><td><span class="item-b"> {{ ordine?.statoOrdine }}</span></td>
+    
+       <td> <span class="item-a">Stato Pagamento</span
+        ></td><td><span class="item-b"> {{ ordine?.pagamentoOrdine }}</span></td>
+      </div>
     </div>
-  </div>
+  </table>
 
   <hr />
-
   <div class="container-1">
     <div class="item">
-      <span class="item-a">Stato Ordine</span
-      ><span class="item-b"> {{ ordine?.statoOrdine }}</span>
-    </div>
-  </div>
-
-  <hr />
-
-  <div class="container-1">
-    <div class="item">
-      <span class="item-a">Stato Pagamento</span
-      ><span class="item-b"> {{ ordine?.pagamentoOrdine }}</span>
-    </div>
-  </div>
-
-  <hr />
-
-  <div class="container-1">
-    <div class="item">
-      <span class="item-a">TOTALE</span
+      <span class="item-a" style="color: brown;">TOTALE</span
       ><span class="item-b"> {{ ordine?.totale | currency : "EUR" }}</span>
     </div>
   </div>

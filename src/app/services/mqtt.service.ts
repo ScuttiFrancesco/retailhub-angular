@@ -1,23 +1,20 @@
 import { Injectable } from '@angular/core';
-import {MqttService, IMqttMessage} from 'ngx-mqtt';
+import { MqttService, IMqttMessage } from 'ngx-mqtt';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class MqttsService {
+ // constructor(private mqttService: MqttService) {}
 
-  constructor(private mqttService : MqttService) { }
-
-
-  public topicSubscribe(topic: string) : Observable<IMqttMessage>{
-console.log("topicSubscribe: " , topic);
+ /* public topicSubscribe(topic: string): Observable<IMqttMessage> {
+    console.log('topicSubscribe: ', topic);
     return this.mqttService.observe(topic);
   }
 
-  public topicPublish(topic: string, message: string){
-    console.log("topicPublish: " , topic);
-    this.mqttService.unsafePublish(topic, message, {qos: 1, retain: true});
-  }
-
+  public topicPublish(topic: string, message: string) {
+    console.log('topicPublish: ', topic);
+    this.mqttService.unsafePublish(topic, message, { qos: 1, retain: true });
+  }*/
 }
