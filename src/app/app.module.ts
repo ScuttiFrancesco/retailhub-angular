@@ -19,7 +19,9 @@ import { GraficiComponent } from './components/grafici/grafici.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import {MatCardModule} from '@angular/material/card';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
-/*
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MappaComponent } from './components/mappa/mappa.component';
+
 export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions={
   keepalive:120,
   port:443,
@@ -28,7 +30,7 @@ export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions={
   username: 'intellitronika',
   password: 'intellitronika',
   hostname:'rabbitmq.test.intellitronika.com'
-} as IMqttServiceOptions;*/
+} as IMqttServiceOptions;
 
 @NgModule({
   declarations: [
@@ -43,16 +45,18 @@ export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions={
     InserimentoClienteComponent,
     AvvisoComponent,
     GraficiComponent,
+    MappaComponent,
     
   ],
   imports: [
+    MatProgressSpinnerModule,
     MatCardModule,
     NgxChartsModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    //MqttModule.forRoot(MQTT_SERVICE_OPTIONS),
+    MqttModule.forRoot(MQTT_SERVICE_OPTIONS),    
     
   ],
   providers: [ provideHttpClient(withInterceptorsFromDi()), provideAnimationsAsync()],

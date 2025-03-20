@@ -14,6 +14,8 @@ import { formatDate } from '@angular/common';
 import { HomeComponent } from '../home/home.component';
 import { NgForm } from '@angular/forms';
 import moment from 'moment';
+import { MqttsService } from '../../services/mqtt.service';
+import { AppComponent } from '../../app.component';
 
 @Component({
   selector: 'app-inserimento-ordine',
@@ -30,7 +32,9 @@ export class InserimentoOrdineComponent implements OnInit {
     private negozioService: NegozioService,
     private orderService: OrderService,
     private router: Router,
-    private homecomponent: HomeComponent
+    private homecomponent: HomeComponent,
+    private mqttService: MqttsService,
+    private appComponent: AppComponent
   ) {}
 
   // oggetti per il trasferimento dei dati
@@ -45,7 +49,7 @@ export class InserimentoOrdineComponent implements OnInit {
   operatorsList: Operatore[] = [];
   negoziList: Negozio[] = [];
 
-    // array e nuovo prodotto per il carrello
+  // array e nuovo prodotto per il carrello
   products: Prodotto[] = [];
 
   newProduct: Prodotto = new Prodotto();
@@ -118,7 +122,8 @@ export class InserimentoOrdineComponent implements OnInit {
   inserisciOrdine(ordine: Order): void {
     this.orderService.inserisciOrdine(ordine).subscribe(
       (data) => {
-        alert('Ordine inserito con successo');
+        this.appComponent.showAvviso = true;
+        this.appComponent.messaggioModale = 'Ordine inserito con successo';
         this.homecomponent.showtable = true;
         this.orderService.notifyDataChange();
         this.router.navigate(['home']);
@@ -152,7 +157,8 @@ export class InserimentoOrdineComponent implements OnInit {
       (data) => {
         this.selectedClientId = data.id!.toString();
         this.clientsList.push(data);
-        alert('Cliente inserito con successo');
+        this.appComponent.showAvviso = true;
+        this.appComponent.messaggioModale = 'Ordine inserito con successo';
       },
       (error) =>
         console.error("Errore nel recupero dei dettagli dell'ordine:", error)
@@ -194,49 +200,43 @@ export class InserimentoOrdineComponent implements OnInit {
       );
   }
 
- 
-  
-
   //aggiunge i prodotti alla lista che viene poi mostrata
   addProduct() {
-
     if (!this.newProduct.id || this.newQuantity < 1) {
-      alert(
-        'Inserisci un nome di prodotto valido e una quantità maggiore di zero.'
-      );
+      this.appComponent.showAvviso = true;
+        this.appComponent.messaggioModale = 'Inserire un prodotto e una quantità';
       return;
     }
 
-    const prodTemp = {...this.newProduct};
-    prodTemp.quantita! = this.newQuantity + (this.products.find((p) => p.id === this.newProduct.id)?.quantita || 0);
-    
-    const existingProduct : Prodotto | undefined = this.productsList.filter( p => p.id === this.newProduct.id)[0];
+    const prodTemp = { ...this.newProduct };
+    prodTemp.quantita! =
+      this.newQuantity +
+      (this.products.find((p) => p.id === this.newProduct.id)?.quantita || 0);
+
+    const existingProduct: Prodotto | undefined = this.productsList.filter(
+      (p) => p.id === this.newProduct.id
+    )[0];
     console.log(this.newQuantity + ' ' + existingProduct?.quantita);
-    if(prodTemp.quantita > existingProduct!.quantita!){
-      alert(
-        'Quantita superiore a quella disponibile in magazzino.'
-      );
+    if (prodTemp.quantita > existingProduct!.quantita!) {
+      alert('Quantita superiore a quella disponibile in magazzino.');
       prodTemp.quantita -= this.newQuantity;
       return;
-    }     
+    }
 
-    if(this.products.find((p) => p.id === this.newProduct.id)){
+    if (this.products.find((p) => p.id === this.newProduct.id)) {
       const index = this.products.findIndex((p) => p.id === prodTemp.id);
       this.products.splice(index, 1);
     }
-      
-      this.products.push(prodTemp);
-   
+
+    this.products.push(prodTemp);
 
     this.newProduct = new Prodotto();
-    
+
     this.newQuantity = 0;
-    
   }
 
   removeProduct(index: number) {
     this.products.splice(index, 1);
-   
   }
 
   isFormValid(): boolean {

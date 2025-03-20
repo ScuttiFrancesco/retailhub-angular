@@ -22,6 +22,7 @@ export class HomeComponent implements OnInit {
   orders: Order[] = [];
   showtable = true;
   ordineList: string = 'data';
+  showTitle: boolean = true;
 
   constructor(
     private orderService: OrderService,
@@ -63,7 +64,8 @@ export class HomeComponent implements OnInit {
   }
 
   //implementato cambio stato ordine con mex mqtt
-  changeSelectMqtt() {/*
+  changeSelectMqtt() {
+    /*
     this.mqtt
       .topicSubscribe('cambia/stato-ordine/#')
       .subscribe((message: IMqttMessage) => {
@@ -77,7 +79,8 @@ export class HomeComponent implements OnInit {
       'risposta/stato-ordine',
       'Stato ordine aggiornato con successo'
     );
-  */}
+  */
+  }
 
   changeSelect() {
     this.caricaOrdini(this.statoOrd!);
@@ -123,6 +126,7 @@ export class HomeComponent implements OnInit {
   showTableView() {
     this.showtable = true;
     this.sidebarActive = !this.sidebarActive;
+    this.showTitle = true;
   }
 
   showFormInserimentoOrdine() {
@@ -134,6 +138,13 @@ export class HomeComponent implements OnInit {
   showFormInserimentoCliente() {
     this.router.navigate(['inserimento-cliente']);
     this.sidebarActive = this.sidebarActive ? false : this.sidebarActive;
+  }
+
+  showMappa() {
+    this.router.navigate(['home/mappa']);
+    this.sidebarActive = this.sidebarActive ? false : this.sidebarActive;
+    this.showtable = false;
+    this.showTitle = false;
   }
 
   aggiornaForm(id: number) {

@@ -1,0 +1,15 @@
+<div class="mappa-container">
+  <div><h1>Mappa Clienti</h1></div>  
+  <div *ngIf="isLoading" class="loader">
+    <mat-spinner diameter="50"></mat-spinner>
+  </div>
+  <div id="mapContainer" #mapContainer></div>
+</div>
+
+<div #popupContent class="popup-content" style="display: none;">
+  <div class="popup-container">
+    <h3>Negozio</h3>
+    <button class="popup-button">Home</button>
+  </div>
+</div>
+

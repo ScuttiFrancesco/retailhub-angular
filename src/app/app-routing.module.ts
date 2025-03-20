@@ -8,6 +8,7 @@ import { InserimentoOrdineComponent } from './components/inserimento-ordine/inse
 import { AggiornaOrdineComponent } from './components/aggiorna-ordine/aggiorna-ordine.component';
 import { InserimentoClienteComponent } from './components/inserimento-cliente/inserimento-cliente.component';
 import { GraficiComponent } from './components/grafici/grafici.component';
+import { MappaComponent } from './components/mappa/mappa.component';
 
 const routes: Routes = [
   {path: 'home', canActivate: [authGuard],component: HomeComponent, children: [
@@ -15,12 +16,13 @@ const routes: Routes = [
     {path: 'inserimento-ordine', component: InserimentoOrdineComponent},
     {path: 'aggiorna-ordine/:id', component: AggiornaOrdineComponent},
     {path: 'grafici', component: GraficiComponent},
-    
+    {path: 'mappa', component: MappaComponent},
   ]},
+  
   {path: 'inserimento-cliente', canActivate: [authGuard], component: InserimentoClienteComponent},
   {path: 'login', component: LoginComponent},
   { path: '', redirectTo: 'login', pathMatch: 'full' }, 
-  { path: '**', redirectTo: 'home' } 
+  { path: '**', redirectTo: 'home' } ,
 ];
 
 @NgModule({

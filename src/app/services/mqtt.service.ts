@@ -6,9 +6,9 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class MqttsService {
- // constructor(private mqttService: MqttService) {}
+ constructor(private mqttService: MqttService) {}
 
- /* public topicSubscribe(topic: string): Observable<IMqttMessage> {
+ public topicSubscribe(topic: string): Observable<IMqttMessage> {
     console.log('topicSubscribe: ', topic);
     return this.mqttService.observe(topic);
   }
@@ -16,5 +16,5 @@ export class MqttsService {
   public topicPublish(topic: string, message: string) {
     console.log('topicPublish: ', topic);
     this.mqttService.unsafePublish(topic, message, { qos: 1, retain: true });
-  }*/
+  }
 }

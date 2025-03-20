@@ -33,13 +33,15 @@
             "assets": [
               {
                 "glob": "**/*",
-                "input": "public"
+                "input": "./node_modules/leaflet/dist/images",
+                "output": "./assets"
               }
             ],
             "styles": [
               "@angular/material/prebuilt-themes/azure-blue.css",
               "src/styles.css",
-              "node_modules/@fortawesome/fontawesome-free/css/all.css"
+              "node_modules/@fortawesome/fontawesome-free/css/all.css",
+              "node_modules/leaflet/dist/leaflet.css"
             ],
             "scripts": []
           },
@@ -93,13 +95,15 @@
             "assets": [
               {
                 "glob": "**/*",
-                "input": "public"
+                "input": "./node_modules/leaflet/dist/images",
+                "output": "./assets"
               }
             ],
             "styles": [
               "@angular/material/prebuilt-themes/azure-blue.css",
               "src/styles.css",
-              "node_modules/@fortawesome/fontawesome-free/css/all.css"
+              "node_modules/@fortawesome/fontawesome-free/css/all.css",
+              "node_modules/leaflet/dist/leaflet.css"
             ],
             "scripts": []
           }
