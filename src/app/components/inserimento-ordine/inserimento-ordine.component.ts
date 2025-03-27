@@ -134,14 +134,11 @@ export class InserimentoOrdineComponent implements OnInit {
   }
 
   getDataDiOggiFormattata(): string {
-    const oggi = new Date();
-    oggi.setHours(0, 0, 0, 0);
-    return formatDate(oggi, 'yyyy-MM-dd', 'en-US');
+    return new Date().toISOString();
   }
 
   formatDate(date: Date): string {
-    date.setHours(0, 0, 0, 0);
-    return formatDate(date, 'yyyy-MM-dd', 'en-US');
+    return date.toISOString();
   }
 
   onSubmitNewClient(form: NgForm) {
@@ -186,11 +183,11 @@ export class InserimentoOrdineComponent implements OnInit {
         this.order.negozio = this.negozio;
         this.order.pagamentoOrdine = 'DAPAGARE';
         this.order.statoOrdine = 'RICEVUTO';
-        this.order.dataOrdine = formatDate(
-          new Date(this.date),
-          'yyyy-MM-dd',
-          'en'
-        ).toString();
+        
+        // Modificare questa riga per usare il formato ISO completo con timezone
+        const dateObj = new Date(this.date);
+        this.order.dataOrdine = dateObj.toISOString(); // Formato 2025-03-27T00:00:00.000Z
+        
         this.order.prodotti = this.products;
         console.log('Ordine:', this.order);
         this.inserisciOrdine(this.order);

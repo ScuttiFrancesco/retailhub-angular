@@ -138,7 +138,7 @@
           </td>
         </tr>
         <tr *ngFor="let order of orders">
-          <td>{{ order.dataOrdine }}</td>
+          <td>{{ order.dataOrdine | date}}</td>
           <td>{{ order.cliente?.nome }} {{ order.cliente?.cognome }}</td>
           <td>{{ order.negozio?.sede }}</td>
           <td>{{ order.operatore?.nome }} {{ order.operatore?.cognome }}</td>
